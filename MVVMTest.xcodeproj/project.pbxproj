@@ -127,7 +127,6 @@
 		D62FAB0E1E260F1200D00490 /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D62FAAFC1E260F1200D00490 /* UIImageView+HighlightedWebCache.m */; };
 		D62FAB0F1E260F1200D00490 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D62FAAFE1E260F1200D00490 /* UIImageView+WebCache.m */; };
 		D62FAB101E260F1200D00490 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D62FAB001E260F1200D00490 /* UIView+WebCacheOperation.m */; };
-		D62FAB161E26117600D00490 /* NSString+stringFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = D62FAB151E26117600D00490 /* NSString+stringFrame.m */; };
 		D6318AE01E1B869900E2DCC6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D6318ADF1E1B869900E2DCC6 /* main.m */; };
 		D6318AEB1E1B869900E2DCC6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6318AEA1E1B869900E2DCC6 /* Assets.xcassets */; };
 		D6318AEE1E1B869900E2DCC6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6318AEC1E1B869900E2DCC6 /* LaunchScreen.storyboard */; };
@@ -393,8 +392,6 @@
 		D62FAAFE1E260F1200D00490 /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		D62FAAFF1E260F1200D00490 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		D62FAB001E260F1200D00490 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
-		D62FAB141E26117600D00490 /* NSString+stringFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+stringFrame.h"; sourceTree = "<group>"; };
-		D62FAB151E26117600D00490 /* NSString+stringFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+stringFrame.m"; sourceTree = "<group>"; };
 		D6318ADB1E1B869900E2DCC6 /* MVVMTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MVVMTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6318ADF1E1B869900E2DCC6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D6318AEA1E1B869900E2DCC6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -776,8 +773,6 @@
 				D6318AEC1E1B869900E2DCC6 /* LaunchScreen.storyboard */,
 				D6318AEF1E1B869900E2DCC6 /* Info.plist */,
 				D62FAAB91E26027200D00490 /* MVVMTest.pch */,
-				D62FAB141E26117600D00490 /* NSString+stringFrame.h */,
-				D62FAB151E26117600D00490 /* NSString+stringFrame.m */,
 				D62FAABD1E26083C00D00490 /* Lib */,
 				D6318ADE1E1B869900E2DCC6 /* Supporting Files */,
 			);
@@ -946,7 +941,6 @@
 				D61FBB1C1E2C75AD000CE532 /* NSString+RACSupport.m in Sources */,
 				D61FBB4A1E2C75AD000CE532 /* RACTargetQueueScheduler.m in Sources */,
 				D62FAAD81E26084800D00490 /* MASConstraintMaker.m in Sources */,
-				D62FAB161E26117600D00490 /* NSString+stringFrame.m in Sources */,
 				D61FBB201E2C75AD000CE532 /* RACArraySequence.m in Sources */,
 				D61FBB041E2C75AD000CE532 /* EXTRuntimeExtensions.m in Sources */,
 				D61FBB311E2C75AD000CE532 /* RACImmediateScheduler.m in Sources */,
