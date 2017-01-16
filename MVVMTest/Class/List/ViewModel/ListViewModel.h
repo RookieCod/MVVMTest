@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ListModel.h"
+#import "ListModel.h"//分离model，可以让model复用更加方便
 @interface ListViewModel : NSObject
 
 - (instancetype)initListViewModel;
@@ -16,4 +16,9 @@
  * 存放数据源
  */
 @property (nonatomic, strong) NSMutableArray *dataArray;
+
+/**
+ * cellClick
+ */
+@property (nonatomic, strong) RACSubject *cellClick;
 @end

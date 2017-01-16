@@ -10,6 +10,7 @@
 #import "ListViewModel.h"
 #import "ListModel.h"
 #import "ListTableView.h"
+#import "DetailViewController.h"
 @interface ListViewController ()
 /**
  * <#注释#>
@@ -51,7 +52,21 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationItem.title = @"MVVM测试";
+    [self bindViewModel];
 }
+
+//绑定ViewModel
+- (void)bindViewModel
+{
+    @weakify(self);
+    [[self.listViewModel.cellClick takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id x) {
+        @strongify(self);
+        DetailViewController *detailVC = [[DetailViewController alloc] init];
+        [self.navigationController pushViewController:detailVC animated:YES];
+    }];
+
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

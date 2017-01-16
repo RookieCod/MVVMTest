@@ -43,4 +43,13 @@
     }
     return self;
 }
+
+- (RACSubject *)cellClick
+{
+    if (!_cellClick) {
+        _cellClick = [RACSubject subject];
+    }
+    return _cellClick;
+}
+
 @end
