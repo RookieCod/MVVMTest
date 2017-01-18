@@ -134,6 +134,8 @@
 		D6318B031E1B876000E2DCC6 /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6318B021E1B876000E2DCC6 /* ListViewController.m */; };
 		D6318B061E1B87A500E2DCC6 /* ListTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6318B051E1B87A500E2DCC6 /* ListTableView.m */; };
 		D6318B091E1B87CE00E2DCC6 /* ListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D6318B081E1B87CE00E2DCC6 /* ListModel.m */; };
+		D652AD9A1E2E06990082D194 /* DetailViews.m in Sources */ = {isa = PBXBuildFile; fileRef = D652AD991E2E06990082D194 /* DetailViews.m */; };
+		D652AD9D1E2E06AE0082D194 /* DetailViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D652AD9C1E2E06AE0082D194 /* DetailViewModel.m */; };
 		D6AF7B6E1E1F430E00A51C4C /* ListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D6AF7B6D1E1F430E00A51C4C /* ListViewModel.m */; };
 /* End PBXBuildFile section */
 
@@ -405,6 +407,10 @@
 		D6318B051E1B87A500E2DCC6 /* ListTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListTableView.m; sourceTree = "<group>"; };
 		D6318B071E1B87CE00E2DCC6 /* ListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListModel.h; sourceTree = "<group>"; };
 		D6318B081E1B87CE00E2DCC6 /* ListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListModel.m; sourceTree = "<group>"; };
+		D652AD981E2E06990082D194 /* DetailViews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViews.h; sourceTree = "<group>"; };
+		D652AD991E2E06990082D194 /* DetailViews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViews.m; sourceTree = "<group>"; };
+		D652AD9B1E2E06AE0082D194 /* DetailViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewModel.h; sourceTree = "<group>"; };
+		D652AD9C1E2E06AE0082D194 /* DetailViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewModel.m; sourceTree = "<group>"; };
 		D6AF7B6C1E1F430E00A51C4C /* ListViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListViewModel.h; sourceTree = "<group>"; };
 		D6AF7B6D1E1F430E00A51C4C /* ListViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListViewModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -630,33 +636,12 @@
 		D61FBB651E2C9A3C000CE532 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				D652AD951E2E068A0082D194 /* Models */,
+				D652AD961E2E068A0082D194 /* ViewModels */,
+				D652AD971E2E068A0082D194 /* Views */,
 				D61FBB691E2C9A91000CE532 /* ViewControllers */,
-				D61FBB661E2C9A91000CE532 /* ViewModels */,
-				D61FBB671E2C9A91000CE532 /* Models */,
-				D61FBB681E2C9A91000CE532 /* Views */,
 			);
 			path = Detail;
-			sourceTree = "<group>";
-		};
-		D61FBB661E2C9A91000CE532 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		D61FBB671E2C9A91000CE532 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		D61FBB681E2C9A91000CE532 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		D61FBB691E2C9A91000CE532 /* ViewControllers */ = {
@@ -847,6 +832,31 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		D652AD951E2E068A0082D194 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D652AD961E2E068A0082D194 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				D652AD9B1E2E06AE0082D194 /* DetailViewModel.h */,
+				D652AD9C1E2E06AE0082D194 /* DetailViewModel.m */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		D652AD971E2E068A0082D194 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D652AD981E2E06990082D194 /* DetailViews.h */,
+				D652AD991E2E06990082D194 /* DetailViews.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -921,6 +931,7 @@
 			files = (
 				D61FBB411E2C75AD000CE532 /* RACSignal.m in Sources */,
 				D61FBB361E2C75AD000CE532 /* RACMulticastConnection.m in Sources */,
+				D652AD9A1E2E06990082D194 /* DetailViews.m in Sources */,
 				D61FBB5F1E2C75AD000CE532 /* UISwitch+RACSignalSupport.m in Sources */,
 				D61FBB5B1E2C75AD000CE532 /* UIRefreshControl+RACCommandSupport.m in Sources */,
 				D62FAB0B1E260F1200D00490 /* UIImage+GIF.m in Sources */,
@@ -991,6 +1002,7 @@
 				D61FBB181E2C75AD000CE532 /* NSOrderedSet+RACSequenceAdditions.m in Sources */,
 				D61FBB141E2C75AD000CE532 /* NSObject+RACKVOWrapper.m in Sources */,
 				D61FBB061E2C75AD000CE532 /* MKAnnotationView+RACSignalSupport.m in Sources */,
+				D652AD9D1E2E06AE0082D194 /* DetailViewModel.m in Sources */,
 				D62FAB0E1E260F1200D00490 /* UIImageView+HighlightedWebCache.m in Sources */,
 				D61FBB2D1E2C75AD000CE532 /* RACEmptySignal.m in Sources */,
 				D62FAB061E260F1200D00490 /* SDWebImageDownloader.m in Sources */,
