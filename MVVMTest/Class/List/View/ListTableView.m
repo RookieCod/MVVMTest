@@ -74,7 +74,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    //如果有跳转逻辑 要放到controller中去做，如果不用rac，就要用代理，会很麻烦
+    //如果有跳转逻辑 要放到controller中去做
     [_viewModel.cellClick sendNext:nil];
 }
 

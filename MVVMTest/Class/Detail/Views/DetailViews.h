@@ -9,5 +9,19 @@
 #import <UIKit/UIKit.h>
 
 @interface DetailViews : UIView
+/*
+ userName
+ */
+@property (nonatomic,strong) UITextField *userNameField;
+
+/*
+ password
+ */
+@property (nonatomic,strong) UITextField *passwordField;
+
+@property (nonatomic, strong) UIButton *loginButton;
+
+
+- (instancetype)initWithFrame:(CGRect)frame;
 
 @end

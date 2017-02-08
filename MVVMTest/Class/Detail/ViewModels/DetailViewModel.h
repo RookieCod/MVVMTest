@@ -10,4 +10,5 @@
 
 @interface DetailViewModel : NSObject
 
+@property (nonatomic, strong) RACCommand *orderCreateCommand;
 @end

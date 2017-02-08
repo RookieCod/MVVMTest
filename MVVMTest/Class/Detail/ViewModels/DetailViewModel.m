@@ -10,4 +10,18 @@
 
 @implementation DetailViewModel
 
+- (RACCommand *)orderCreateCommand
+{
+    _orderCreateCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+            NSLog(@"==%@",input);
+            //提交网络请求
+            NSLog(@"网络请求");
+            [subscriber sendNext:@"33333"];
+            [subscriber sendCompleted];
+            return nil;
+        }];
+    }];
+    return _orderCreateCommand;
+}
 @end
