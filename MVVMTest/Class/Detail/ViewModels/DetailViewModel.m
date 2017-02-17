@@ -24,4 +24,15 @@
     }];
     return _orderCreateCommand;
 }
+
+- (RACDisposable *)mergeSignal
+{
+    if (!_mergeSignal) {
+        _mergeSignal = [[RACSignal merge:@[]] subscribeCompleted:^{
+            NSLog(@"两个网络请求都已经完成");
+        }];
+    }
+    return _mergeSignal;
+}
+
 @end
