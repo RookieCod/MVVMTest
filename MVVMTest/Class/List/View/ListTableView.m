@@ -26,6 +26,12 @@
     self = [super initWithFrame:frame];
     if (self) {
         _viewModel = viewModel;
+        
+        [[self rac_signalForSelector:@selector(scrollViewDidScroll:) fromProtocol:@protocol(UIScrollViewDelegate)]
+            subscribeNext:^(RACTuple *x) {
+                UITableView *tt = (UITableView *)x.first;
+                [_viewModel.scrollViewDidScroll sendNext:tt];
+            }];
         [self createViews];
     }
     return self;
@@ -48,6 +54,7 @@
     return _mainTableView;
 }
 
+
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
@@ -62,6 +69,14 @@
     if (!cell) {
         cell = [[ListTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
+    
+    [[[cell.loginButton
+            rac_signalForControlEvents:UIControlEventTouchUpInside]
+            takeUntil:cell.rac_prepareForReuseSignal]
+            subscribeNext:^(id x) {
+            
+        
+            }];
     cell.listModel = [_viewModel.dataArray objectAtIndex:indexPath.row];
     return cell;
 }

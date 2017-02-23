@@ -21,6 +21,7 @@
  * <#注释#>
  */
 @property (nonatomic, strong) UILabel *descLabel;
+
 @end
 
 @implementation ListTableCell

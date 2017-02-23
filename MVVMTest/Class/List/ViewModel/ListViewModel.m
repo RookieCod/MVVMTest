@@ -57,12 +57,11 @@
     return _cellClick;
 }
 
-- (RACSubject *)loginButtonClick
+- (RACSubject *)scrollViewDidScroll
 {
-    if (!_loginButtonClick) {
-        _loginButtonClick = [RACSubject subject];
+    if (!_scrollViewDidScroll) {
+        _scrollViewDidScroll = [RACSubject subject];
     }
-    return _loginButtonClick;
+    return _scrollViewDidScroll;
 }
-
 @end

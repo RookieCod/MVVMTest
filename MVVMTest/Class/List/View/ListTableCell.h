@@ -16,5 +16,7 @@
 @property (nonatomic, strong) ListModel *listModel;
 
 + (CGFloat)cellHeight:(ListModel *)listModel;
+/** <#description#> */
+@property (nonatomic, strong) UIButton *loginButton;
 
 @end

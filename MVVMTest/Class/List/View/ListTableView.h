@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "ListViewModel.h"
-@interface ListTableView : UIView
+@interface ListTableView : UIView<UIScrollViewDelegate>
 - (instancetype)initWithListViewModel:(ListViewModel *)viewModel frame:(CGRect)frame;
+/** <#description#> */
+@property (nonatomic, weak) id delegate;
 @end

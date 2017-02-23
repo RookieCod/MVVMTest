@@ -26,5 +26,5 @@
 /**
  登陆按钮点击
  */
-@property (nonatomic, strong) RACSubject *loginButtonClick;
+@property (nonatomic, strong) RACSubject *scrollViewDidScroll;
 @end

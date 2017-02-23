@@ -82,7 +82,18 @@
          //execute:input，参数是传递到commandblock中的参数，可以作为网络请求的入参传递过去
          [[self.detailViewModel.orderCreateCommand execute:@1]
           subscribeNext:^(NSString *x) {
-              NSLog(@"成功拿到数据==%@",x);
+              //NSLog(@"成功拿到数据==%@",x);
+              UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Alert"
+                                                                  message:@""
+                                                                 delegate:nil
+                                                        cancelButtonTitle:@""
+                                                        otherButtonTitles:@"确定", nil];
+              [alertView.rac_buttonClickedSignal subscribeNext:^(NSNumber *index) {
+                  if ([index integerValue] == 1) {
+                      NSLog(@"确定按钮的点击");
+                  }
+              }];
+              [alertView show];
           }
           error:^(NSError *error) {
               NSLog(@"登陆失败的回调");

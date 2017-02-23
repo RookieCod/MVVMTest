@@ -54,6 +54,14 @@
     self.navigationItem.title = @"MVVM测试";
     
     [self bindViewModel];
+    
+    
+//    [[self rac_signalForSelector:@selector(scrollViewDidScroll:) fromProtocol:@protocol(UIScrollViewDelegate)]
+//      subscribeNext:^(RACTuple *scrollView) {
+//          NSLog(@"====%@",scrollView);
+//      }];
+//    self.tableView.delegate = nil;
+//    self.tableView.delegate = self;
 }
 
 //绑定ViewModel
@@ -65,10 +73,15 @@
         @strongify(self);
         DetailViewController *detailVC = [[DetailViewController alloc] init];
         detailVC.orderId = @"rac可以通过KVC对只读属性赋值";
-        NSLog(@"只会执行一次");
         [self.navigationController pushViewController:detailVC animated:YES];
     }];
 
+    //用来代替scrollDelegate
+    [[self.listViewModel.scrollViewDidScroll
+     takeUntil:self.rac_willDeallocSignal]
+     subscribeNext:^(UITableView *tableView) {
+         NSLog(@"%f",tableView.contentOffset.y);
+     }];
 }
 
 
