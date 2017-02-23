@@ -64,7 +64,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *identifier = @"aaaaaaaaa";
+    static NSString *identifier = @"cellIdentifier";
     ListTableCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (!cell) {
         cell = [[ListTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
@@ -74,7 +74,7 @@
             rac_signalForControlEvents:UIControlEventTouchUpInside]
             takeUntil:cell.rac_prepareForReuseSignal]
             subscribeNext:^(id x) {
-            
+            //要用RACSubject把这个实现调到VC中去，不要再view中做逻辑的处理
         
             }];
     cell.listModel = [_viewModel.dataArray objectAtIndex:indexPath.row];
