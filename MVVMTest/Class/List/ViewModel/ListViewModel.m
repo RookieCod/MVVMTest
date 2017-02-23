@@ -35,7 +35,12 @@
         //此处处理网络请求
         for (int i = 0; i < 8; i++) {
             ListModel *listModel = [[ListModel alloc] init];
-            listModel.titleName = @"MVVM初探";
+            if (i == 1 || i == 3 || i == 5) {
+                listModel.titleName = @"MVVM初探";
+            } else {
+            
+                listModel.titleName = @"RAC学习";
+            }
             listModel.desc = @"受MVC或MVP架构的影响，对MVVM最初印象以为这是一个以ViewModel为核心，处理View和Model的开发架构。核心问题就在于对ViewModel角色的定位不清！";
             listModel.imageUrl = @"http://mmbiz.qpic.cn/mmbiz/XxE4icZUMxeFjluqQcibibdvEfUyYBgrQ3k7kdSMEB3vRwvjGecrPUPpHW0qZS21NFdOASOajiawm6vfKEZoyFoUVQ/640?wx_fmt=jpeg&wxfrom=5";
             [self.dataArray addObject:listModel];
@@ -50,6 +55,14 @@
         _cellClick = [RACSubject subject];
     }
     return _cellClick;
+}
+
+- (RACSubject *)loginButtonClick
+{
+    if (!_loginButtonClick) {
+        _loginButtonClick = [RACSubject subject];
+    }
+    return _loginButtonClick;
 }
 
 @end

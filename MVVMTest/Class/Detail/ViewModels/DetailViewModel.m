@@ -8,17 +8,26 @@
 
 #import "DetailViewModel.h"
 
+@interface DetailViewModel ()
+/** session */
+@property (nonatomic, strong) AFHTTPSessionManager *sessionManager;
+@end
 @implementation DetailViewModel
 
 - (RACCommand *)orderCreateCommand
 {
     _orderCreateCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-            NSLog(@"==%@",input);
+            NSLog(@"==%@",self.userName);
             //提交网络请求
             NSLog(@"网络请求");
+            //成功
             [subscriber sendNext:@"33333"];
             [subscriber sendCompleted];
+            
+            //失败,error中要包含一些失败信息，不然
+            [subscriber sendError:nil];
+            
             return nil;
         }];
     }];
@@ -34,5 +43,8 @@
     }
     return _mergeSignal;
 }
+
+
+
 
 @end

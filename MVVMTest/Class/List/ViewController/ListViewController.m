@@ -59,10 +59,13 @@
 //绑定ViewModel
 - (void)bindViewModel
 {
+    //观察listViewModel属性的变化，如果有变化就去更新cell上的数据
     @weakify(self);
     [[self.listViewModel.cellClick takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id x) {
         @strongify(self);
         DetailViewController *detailVC = [[DetailViewController alloc] init];
+        detailVC.orderId = @"rac可以通过KVC对只读属性赋值";
+        NSLog(@"只会执行一次");
         [self.navigationController pushViewController:detailVC animated:YES];
     }];
 

@@ -21,4 +21,10 @@
  * cellClick
  */
 @property (nonatomic, strong) RACSubject *cellClick;
+
+
+/**
+ 登陆按钮点击
+ */
+@property (nonatomic, strong) RACSubject *loginButtonClick;
 @end

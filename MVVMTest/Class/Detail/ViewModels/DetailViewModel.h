@@ -10,6 +10,10 @@
 
 @interface DetailViewModel : NSObject
 
+/** userName */
+@property (nonatomic, strong, readonly) NSString *userName;
+/** password */
+@property (nonatomic, strong) NSString *password;
 @property (nonatomic, strong) RACCommand *orderCreateCommand;
 
 @property (nonatomic, strong) RACDisposable *mergeSignal;

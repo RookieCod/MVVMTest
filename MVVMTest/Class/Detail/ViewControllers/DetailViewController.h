@@ -10,4 +10,8 @@
 
 @interface DetailViewController : UIViewController
 
+
+/** id */
+@property (nonatomic, strong) NSString *orderId;
+
 @end

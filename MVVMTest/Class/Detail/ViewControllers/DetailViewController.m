@@ -9,6 +9,7 @@
 #import "DetailViewController.h"
 #import "DetailViews.h"
 #import "DetailViewModel.h"
+#import "ListModel.h"
 
 @interface DetailViewController ()
 
@@ -28,63 +29,80 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    
+    RAC(self.detailViewModel,userName) = RACObserve(self, orderId);
+    
+    RAC(self.detailViewModel,password) = self.detailView.passwordField.rac_textSignal;
+    
     RACSignal *validUserNameSignal =
-     [self.detailView.userNameField.rac_textSignal
-      map:^id(NSString *text) {
-          return @([self isValidUserName:text]);
-      }];
+    [self.detailView.userNameField.rac_textSignal
+     map:^id(NSString *text) {
+         return @([self isValidUserName:text]);
+     }];
     RACSignal *validPasswordSignal =
-     [self.detailView.passwordField.rac_textSignal
-      map:^id(NSString *text) {
-          return @([self isValidPassword:text]);
-      }];
+    [self.detailView.passwordField.rac_textSignal
+     map:^id(NSString *text) {
+         return @([self isValidPassword:text]);
+     }];
     RAC(self.detailView.userNameField,backgroundColor) =
-     [validUserNameSignal
-      map:^id(NSNumber *value) {
-          return [value boolValue] ? [UIColor yellowColor] : [UIColor clearColor];
-      }];
+    [validUserNameSignal
+     map:^id(NSNumber *value) {
+         return [value boolValue] ? [UIColor yellowColor] : [UIColor clearColor];
+     }];
     
     RAC(self.detailView.passwordField,backgroundColor) =
-     [validPasswordSignal
-      map:^id(NSNumber *value) {
-          return [value boolValue] ? [UIColor yellowColor] : [UIColor clearColor];
-      }];
+    [validPasswordSignal
+     map:^id(NSNumber *value) {
+         return [value boolValue] ? [UIColor yellowColor] : [UIColor clearColor];
+     }];
     
-    RACSignal *signUpSignal =
-     [RACSignal combineLatest:@[validUserNameSignal,validPasswordSignal]
+    [[RACSignal combineLatest:@[validUserNameSignal,validPasswordSignal]
                        reduce:^id(NSNumber *userNameValid, NSNumber *passwordValid){
                            return @([userNameValid boolValue] && [passwordValid boolValue]);
-                       }];
+                       }]
+     subscribeNext:^(NSNumber *signalActive) {
+         self.detailView.loginButton.enabled = [signalActive boolValue];
+     }];
     
-    [signUpSignal subscribeNext:^(NSNumber *signupActive) {
-        self.detailView.loginButton.enabled = [signupActive boolValue];
-    }];
-    
-//    [[self.detailView.loginButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
-//        NSLog(@"=====");
-//    }];
-    
-    
+    //    [[self.detailView.loginButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(UIButton *x) {
+    //        NSLog(@"=====%@",x);
+    //    }];
     
     //rac遍历数组和字典
-//    NSArray *array = @[@1,@2,@5];
-//    [array.rac_sequence.signal subscribeNext:^(id x) {
-//        NSLog(@"%@===%@",x,[NSThread currentThread]);
-//    }];
+    //    NSArray *array = @[@1,@2,@5];
+    //    [array.rac_sequence.signal subscribeNext:^(id x) {
+    //        NSLog(@"%@===%@",x,[NSThread currentThread]);
+    //    }];
+    
     @weakify(self);
     [[self.detailView.loginButton
-     rac_signalForControlEvents:UIControlEventTouchUpInside]
-      subscribeNext:^(id x) {
-          @strongify(self);
-          //execute:input，参数是传递到commandblock中的参数，可以作为网络请求的入参传递过去
-          [[self.detailViewModel.orderCreateCommand execute:@1]
-           subscribeNext:^(NSString *x) {
-               NSLog(@"拿到数据==%@",x);
-           }
-           error:^(NSError *error) {
-               
-           }];
-      }];
+      rac_signalForControlEvents:UIControlEventTouchUpInside]
+     subscribeNext:^(id x) {
+         @strongify(self);
+         //execute:input，参数是传递到commandblock中的参数，可以作为网络请求的入参传递过去
+         [[self.detailViewModel.orderCreateCommand execute:@1]
+          subscribeNext:^(NSString *x) {
+              NSLog(@"成功拿到数据==%@",x);
+          }
+          error:^(NSError *error) {
+              NSLog(@"登陆失败的回调");
+          }];
+     }];
+    
+    //    @weakify(self);
+    //    [[self.detailView.loginButton
+    //     rac_signalForControlEvents:UIControlEventTouchUpInside]
+    //       subscribeNext:^(id x) {
+    //           NSLog(@"===%@",x);
+    //           @strongify(self);
+    //           [[self.detailViewModel.orderCreateCommand execute:nil]
+    //            subscribeNext:^(ListModel *model) {
+    //                NSLog(@"successToGetData");
+    //            }
+    //            error:^(NSError *error) {
+    //
+    //            }];
+    //       }];
     
 }
 
@@ -107,7 +125,7 @@
 
 - (BOOL)isValidUserName:(NSString *)text
 {
-    if (text.length > 5) {
+    if (text.length > 0 || text.integerValue != 0) {
         return YES;
     }
     return NO;
@@ -115,7 +133,7 @@
 
 - (BOOL)isValidPassword:(NSString *)text
 {
-    if (text.length > 5) {
+    if (text.length > 0 || text.integerValue != 0) {
         return YES;
     }
     return NO;

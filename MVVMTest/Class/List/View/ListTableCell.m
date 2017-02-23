@@ -29,7 +29,18 @@
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
+        @weakify(self);
+        [RACObserve(self, listModel) subscribeNext:^(ListModel *listModel) {
+            @strongify(self);
+            [self.leftImage sd_setImageWithURL:[NSURL URLWithString:_listModel.imageUrl] placeholderImage:nil];
+//            self.titleLabel.text = _listModel.titleName;
+//            self.descLabel.text = _listModel.desc;
+        }];
+        RAC(self.titleLabel,text) = RACObserve(self, listModel.titleName);
+        RAC(self.descLabel,text) = RACObserve(self, listModel.desc);
         [self zs_setupViews];
+        
+
     }
     return self;
 }
@@ -83,17 +94,15 @@
     return _descLabel;
 }
 
-- (void)setListModel:(ListModel *)listModel
-{
-    if (!listModel) {
-        return;
-    }
-    _listModel = listModel;
-    
-    [self.leftImage sd_setImageWithURL:[NSURL URLWithString:_listModel.imageUrl] placeholderImage:nil];
-    self.titleLabel.text = _listModel.titleName;
-    self.descLabel.text = _listModel.desc;
-}
+//- (void)setListModel:(ListModel *)listModel
+//{
+//    if (!listModel) {
+//        return;
+//    }
+//    _listModel = listModel;
+//    
+//    
+//}
 
 + (CGFloat)cellHeight:(ListModel *)listModel
 {
