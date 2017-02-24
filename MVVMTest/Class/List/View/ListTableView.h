@@ -10,6 +10,6 @@
 #import "ListViewModel.h"
 @interface ListTableView : UIView<UIScrollViewDelegate>
 - (instancetype)initWithListViewModel:(ListViewModel *)viewModel frame:(CGRect)frame;
-/** <#description#> */
+/** 设置scrollView的delegate */
 @property (nonatomic, weak) id delegate;
 @end

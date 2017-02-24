@@ -75,7 +75,8 @@
             takeUntil:cell.rac_prepareForReuseSignal]
             subscribeNext:^(id x) {
             //要用RACSubject把这个实现调到VC中去，不要再view中做逻辑的处理
-        
+            //也可以把loginButton属性放在.h文件里边（不建议），这样的话把button暴露在外部
+            //
             }];
     cell.listModel = [_viewModel.dataArray objectAtIndex:indexPath.row];
     return cell;
