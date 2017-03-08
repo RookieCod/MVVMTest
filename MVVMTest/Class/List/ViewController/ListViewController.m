@@ -11,6 +11,7 @@
 #import "ListModel.h"
 #import "ListTableView.h"
 #import "DetailViewController.h"
+
 @interface ListViewController ()
 /**
  * <#注释#>
@@ -48,40 +49,46 @@
     [super loadView];
     self.view = self.tableView;
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationItem.title = @"MVVM测试";
+    self.navigationItem.title = @"MVVM+RAC";
     
     [self bindViewModel];
     
+    //ng执行viewModel中的command
+    [[self.listViewModel.listCommand execute:@{@"q":@"基础"}] subscribeNext:^(NSArray *dataArray) {
+    }];
+    self.listViewModel.listCommand.allowsConcurrentExecution = YES;
+    [self.listViewModel.listCommand.errors subscribeNext:^(id x) {
+        NSLog(@"errorx=%@",x);
+    }];
+//    [[self.listViewModel.listCommand.executing skip:1] subscribeNext:^(NSNumber *x) {
+//        if ([x boolValue]) {
+//            NSLog(@"loading...在这可以添加罩子");
+//        } else {
+//            NSLog(@"success---在这移除罩子");
+//        }
+//    }];
     
-//    [[self rac_signalForSelector:@selector(scrollViewDidScroll:) fromProtocol:@protocol(UIScrollViewDelegate)]
-//      subscribeNext:^(RACTuple *scrollView) {
-//          NSLog(@"====%@",scrollView);
-//      }];
-//    self.tableView.delegate = nil;
-//    self.tableView.delegate = self;
+//    [self.listViewModel.listCommand.executionSignals.switchToLatest subscribeNext:^(id x) {
+//        
+//    }];
+    
+    RAC(self.tableView,dataArray) = RACObserve(self.listViewModel, dataArray);
 }
 
 //绑定ViewModel
 - (void)bindViewModel
 {
-    //观察listViewModel属性的变化，如果有变化就去更新cell上的数据
     @weakify(self);
-    [[self.listViewModel.cellClick takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id x) {
+    [[self.tableView.cellClick takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id x) {
         @strongify(self);
         DetailViewController *detailVC = [[DetailViewController alloc] init];
-        detailVC.orderId = @"rac可以通过KVC对只读属性赋值";
+        detailVC.orderId = @"012345";
         [self.navigationController pushViewController:detailVC animated:YES];
     }];
-
-    //用来代替scrollDelegate
-    [[self.listViewModel.scrollViewDidScroll
-     takeUntil:self.rac_willDeallocSignal]
-     subscribeNext:^(UITableView *tableView) {
-         NSLog(@"%f",tableView.contentOffset.y);
-     }];
 }
 
 

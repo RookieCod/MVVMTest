@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D60993111E67B256009B2715 /* SocketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D60993101E67B256009B2715 /* SocketViewController.m */; };
 		D6193AC5A3E4D9A40BF7E9CA /* libPods-MVVMTest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A7A0CF50E5988D5755E5161 /* libPods-MVVMTest.a */; };
 		D61FBA391E2C69D6000CE532 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D61FBA381E2C69D6000CE532 /* Default-568h@2x.png */; };
 		D61FBB041E2C75AD000CE532 /* EXTRuntimeExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = D61FBA3E1E2C75AD000CE532 /* EXTRuntimeExtensions.m */; };
@@ -137,12 +138,15 @@
 		D6318B091E1B87CE00E2DCC6 /* ListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D6318B081E1B87CE00E2DCC6 /* ListModel.m */; };
 		D652AD9A1E2E06990082D194 /* DetailViews.m in Sources */ = {isa = PBXBuildFile; fileRef = D652AD991E2E06990082D194 /* DetailViews.m */; };
 		D652AD9D1E2E06AE0082D194 /* DetailViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D652AD9C1E2E06AE0082D194 /* DetailViewModel.m */; };
+		D65D081D1E6FD810005B7FD2 /* PKProtocolExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = D65D081C1E6FD810005B7FD2 /* PKProtocolExtension.m */; };
 		D6AF7B6E1E1F430E00A51C4C /* ListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D6AF7B6D1E1F430E00A51C4C /* ListViewModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4A7A0CF50E5988D5755E5161 /* libPods-MVVMTest.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MVVMTest.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F533581336A0F2FE820DE5D /* Pods-MVVMTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MVVMTest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MVVMTest/Pods-MVVMTest.debug.xcconfig"; sourceTree = "<group>"; };
+		D609930F1E67B256009B2715 /* SocketViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketViewController.h; sourceTree = "<group>"; };
+		D60993101E67B256009B2715 /* SocketViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketViewController.m; sourceTree = "<group>"; };
 		D61FBA381E2C69D6000CE532 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		D61FBA3C1E2C75AD000CE532 /* EXTKeyPathCoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXTKeyPathCoding.h; sourceTree = "<group>"; };
 		D61FBA3D1E2C75AD000CE532 /* EXTRuntimeExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXTRuntimeExtensions.h; sourceTree = "<group>"; };
@@ -414,6 +418,8 @@
 		D652AD991E2E06990082D194 /* DetailViews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViews.m; sourceTree = "<group>"; };
 		D652AD9B1E2E06AE0082D194 /* DetailViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewModel.h; sourceTree = "<group>"; };
 		D652AD9C1E2E06AE0082D194 /* DetailViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewModel.m; sourceTree = "<group>"; };
+		D65D081B1E6FD810005B7FD2 /* PKProtocolExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKProtocolExtension.h; sourceTree = "<group>"; };
+		D65D081C1E6FD810005B7FD2 /* PKProtocolExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKProtocolExtension.m; sourceTree = "<group>"; };
 		D6AF7B6C1E1F430E00A51C4C /* ListViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListViewModel.h; sourceTree = "<group>"; };
 		D6AF7B6D1E1F430E00A51C4C /* ListViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListViewModel.m; sourceTree = "<group>"; };
 		D9DAF4A15BD5379FAF1227B1 /* Pods-MVVMTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MVVMTest.release.xcconfig"; path = "Pods/Target Support Files/Pods-MVVMTest/Pods-MVVMTest.release.xcconfig"; sourceTree = "<group>"; };
@@ -671,6 +677,8 @@
 			children = (
 				D61FBB6A1E2C9ABA000CE532 /* DetailViewController.h */,
 				D61FBB6B1E2C9ABA000CE532 /* DetailViewController.m */,
+				D609930F1E67B256009B2715 /* SocketViewController.h */,
+				D60993101E67B256009B2715 /* SocketViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -777,6 +785,7 @@
 		D6318ADD1E1B869900E2DCC6 /* MVVMTest */ = {
 			isa = PBXGroup;
 			children = (
+				D65D081A1E6FD810005B7FD2 /* PKProtocolExtension */,
 				D6318AF51E1B86FB00E2DCC6 /* Class */,
 				D6318AEA1E1B869900E2DCC6 /* Assets.xcassets */,
 				D6318AEC1E1B869900E2DCC6 /* LaunchScreen.storyboard */,
@@ -881,6 +890,15 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		D65D081A1E6FD810005B7FD2 /* PKProtocolExtension */ = {
+			isa = PBXGroup;
+			children = (
+				D65D081B1E6FD810005B7FD2 /* PKProtocolExtension.h */,
+				D65D081C1E6FD810005B7FD2 /* PKProtocolExtension.m */,
+			);
+			path = PKProtocolExtension;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -915,6 +933,7 @@
 				TargetAttributes = {
 					D6318ADA1E1B869900E2DCC6 = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = E66G42WG9H;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -1029,6 +1048,7 @@
 				D62FAAD81E26084800D00490 /* MASConstraintMaker.m in Sources */,
 				D61FBB201E2C75AD000CE532 /* RACArraySequence.m in Sources */,
 				D61FBB041E2C75AD000CE532 /* EXTRuntimeExtensions.m in Sources */,
+				D60993111E67B256009B2715 /* SocketViewController.m in Sources */,
 				D61FBB311E2C75AD000CE532 /* RACImmediateScheduler.m in Sources */,
 				D62FAB0D1E260F1200D00490 /* UIImage+WebP.m in Sources */,
 				D61FBB5D1E2C75AD000CE532 /* UISlider+RACSignalSupport.m in Sources */,
@@ -1108,6 +1128,7 @@
 				D62FAB011E260F1200D00490 /* MKAnnotationView+WebCache.m in Sources */,
 				D61FBB3E1E2C75AD000CE532 /* RACSequence.m in Sources */,
 				D61FBB541E2C75AD000CE532 /* UIButton+RACCommandSupport.m in Sources */,
+				D65D081D1E6FD810005B7FD2 /* PKProtocolExtension.m in Sources */,
 				D61FBB351E2C75AD000CE532 /* RACKVOTrampoline.m in Sources */,
 				D61FBB3C1E2C75AD000CE532 /* RACScheduler.m in Sources */,
 				D61FBB0E1E2C75AD000CE532 /* NSIndexSet+RACSequenceAdditions.m in Sources */,
@@ -1240,6 +1261,7 @@
 			baseConfigurationReference = 7F533581336A0F2FE820DE5D /* Pods-MVVMTest.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = E66G42WG9H;
 				GCC_PREFIX_HEADER = MVVMTest/MVVMTest.pch;
 				INFOPLIST_FILE = MVVMTest/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1255,6 +1277,7 @@
 			baseConfigurationReference = D9DAF4A15BD5379FAF1227B1 /* Pods-MVVMTest.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = E66G42WG9H;
 				GCC_PREFIX_HEADER = MVVMTest/MVVMTest.pch;
 				INFOPLIST_FILE = MVVMTest/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

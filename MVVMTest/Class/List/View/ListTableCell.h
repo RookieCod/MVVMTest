@@ -10,13 +10,12 @@
 #import "ListModel.h"
 @interface ListTableCell : UITableViewCell
 
-/**
- * <#注释#>
- */
-@property (nonatomic, strong) ListModel *listModel;
-
-+ (CGFloat)cellHeight:(ListModel *)listModel;
 /** <#description#> */
 @property (nonatomic, strong) UIButton *loginButton;
+
+- (void)configViewsWithModel:(ListModel *)model;
+
++ (ListTableCell *)tableView:(UITableView *)tableView cellWithIdentifier:(NSString *)identifier;
+
 
 @end

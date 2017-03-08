@@ -9,7 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "ListViewModel.h"
 @interface ListTableView : UIView<UIScrollViewDelegate>
+/** <#description#> */
+@property (nonatomic, strong, readonly) NSArray *dataArray;
 - (instancetype)initWithListViewModel:(ListViewModel *)viewModel frame:(CGRect)frame;
-/** 设置scrollView的delegate */
-@property (nonatomic, weak) id delegate;
+/**
+ * cellClick
+ */
+@property (nonatomic, strong) RACSubject *cellClick;
 @end

@@ -426,24 +426,24 @@ static const NSTimeInterval RACSignalAsynchronousWaitTimeout = 10;
 	return subject;
 }
 
-+ (RACSignal *)start:(id (^)(BOOL *success, NSError **error))block {
-	return [[self startWithScheduler:[RACScheduler scheduler] block:block] setNameWithFormat:@"+start:"];
-}
+//+ (RACSignal *)start:(id (^)(BOOL *success, NSError **error))block {
+//	return [[self startWithScheduler:[RACScheduler scheduler] block:block] setNameWithFormat:@"+start:"];
+//}
 
-+ (RACSignal *)startWithScheduler:(RACScheduler *)scheduler block:(id (^)(BOOL *success, NSError **error))block {
-	return [[self startWithScheduler:scheduler subjectBlock:^(id<RACSubscriber> subscriber) {
-		BOOL success = YES;
-		NSError *error = nil;
-		id returned = block(&success, &error);
-
-		if (!success) {
-			[subscriber sendError:error];
-		} else {
-			[subscriber sendNext:returned];
-			[subscriber sendCompleted];
-		}
-	}] setNameWithFormat:@"+startWithScheduler:block:"];
-}
+//+ (RACSignal *)startWithScheduler:(RACScheduler *)scheduler block:(id (^)(BOOL *success, NSError **error))block {
+//	return [[self startWithScheduler:scheduler subjectBlock:^(id<RACSubscriber> subscriber) {
+//		BOOL success = YES;
+//		NSError *error = nil;
+//		id returned = block(&success, &error);
+//
+//		if (!success) {
+//			[subscriber sendError:error];
+//		} else {
+//			[subscriber sendNext:returned];
+//			[subscriber sendCompleted];
+//		}
+//	}] setNameWithFormat:@"+startWithScheduler:block:"];
+//}
 
 #pragma clang diagnostic pop
 

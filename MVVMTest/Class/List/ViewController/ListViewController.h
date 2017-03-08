@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
 @interface ListViewController : UIViewController
+
+- (NSDictionary *)params;
 
 @end

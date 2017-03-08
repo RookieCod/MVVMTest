@@ -14,13 +14,22 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
+  - MJExtension (3.0.13)
+  - SocketRocket (0.5.1)
+  - UITableView+FDTemplateLayoutCell (1.5.beta)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.1.0)
+  - MJExtension (~> 3.0.13)
+  - SocketRocket (~> 0.5.1)
+  - UITableView+FDTemplateLayoutCell (~> 1.5.beta)
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  MJExtension: 5932755f451458eefa24239358817f8d291240c7
+  SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
+  UITableView+FDTemplateLayoutCell: 02b508ab1cb4cea16a8c17ac83d2cd1fd72124f9
 
-PODFILE CHECKSUM: 4a3af2d7215f2b809abbdab6619db4c899a1ea92
+PODFILE CHECKSUM: 0c1532dbd92f96da0ce7799d17f03325f74c46b9
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.2.0

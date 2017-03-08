@@ -16,6 +16,5 @@
 @property (nonatomic, strong) NSString *password;
 @property (nonatomic, strong) RACCommand *orderCreateCommand;
 
-@property (nonatomic, strong) RACDisposable *mergeSignal;
 
 @end

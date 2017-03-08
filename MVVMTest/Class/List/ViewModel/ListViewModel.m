@@ -8,12 +8,15 @@
 
 #import "ListViewModel.h"
 
+#define LISTBASEURL @"https://api.douban.com/v2/book/search"
+
 @interface ListViewModel ()
 {
     ListModel *_listModel;
 
 }
-
+/** <#description#> */
+@property (nonatomic, strong) NSMutableArray *dataArray;
 @end
 
 @implementation ListViewModel
@@ -32,36 +35,37 @@
 {
     if (self = [super init]) {
         
-        //此处处理网络请求
-        for (int i = 0; i < 8; i++) {
-            ListModel *listModel = [[ListModel alloc] init];
-            if (i == 1 || i == 3 || i == 5) {
-                listModel.titleName = @"MVVM初探";
-            } else {
-            
-                listModel.titleName = @"RAC学习";
-            }
-            listModel.desc = @"受MVC或MVP架构的影响，对MVVM最初印象以为这是一个以ViewModel为核心，处理View和Model的开发架构。核心问题就在于对ViewModel角色的定位不清！";
-            listModel.imageUrl = @"http://mmbiz.qpic.cn/mmbiz/XxE4icZUMxeFjluqQcibibdvEfUyYBgrQ3k7kdSMEB3vRwvjGecrPUPpHW0qZS21NFdOASOajiawm6vfKEZoyFoUVQ/640?wx_fmt=jpeg&wxfrom=5";
-            [self.dataArray addObject:listModel];
-        }
+        [self bindData];
     }
     return self;
 }
 
-- (RACSubject *)cellClick
+//绑定数据
+- (void)bindData
 {
-    if (!_cellClick) {
-        _cellClick = [RACSubject subject];
-    }
-    return _cellClick;
+    @weakify(self);
+    _listCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+            @strongify(self);
+            //网络请求
+            [[AFHTTPSessionManager manager] GET:LISTBASEURL
+                                     parameters:input
+                                       progress:nil
+                                        success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                                            
+                                            self.dataArray = [ListModel mj_objectArrayWithKeyValuesArray:responseObject[@"books"]];
+                                            //NSLog(@"%@",self.dataArray);
+                                            [subscriber sendNext:self.dataArray];
+                                            [subscriber sendCompleted];
+                                        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                                            //请求失败
+                                            [subscriber sendError:error];
+                                        }];
+            return nil;
+        }];
+    }];
 }
 
-- (RACSubject *)scrollViewDidScroll
-{
-    if (!_scrollViewDidScroll) {
-        _scrollViewDidScroll = [RACSubject subject];
-    }
-    return _scrollViewDidScroll;
-}
+
+
 @end

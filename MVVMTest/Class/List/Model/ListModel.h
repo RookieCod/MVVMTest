@@ -8,18 +8,14 @@
 
 #import <Foundation/Foundation.h>
 @interface ListModel : NSObject
-/**
- * title
- */
-@property (nonatomic, strong) NSString *titleName;
 
-/**
- * 描述
- */
-@property (nonatomic, strong) NSString *desc;
+/** 图书image */
+@property (nonatomic, strong) NSString *image;
 
-/**
- * 图片
- */
-@property (nonatomic, strong) NSString *imageUrl;
+/** title-书名 */
+@property (nonatomic, strong) NSString *title;
+
+/** catalog-图书简介 */
+@property (nonatomic, strong) NSString *author_intro;
+
 @end

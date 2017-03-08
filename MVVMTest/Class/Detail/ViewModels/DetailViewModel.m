@@ -11,38 +11,60 @@
 @interface DetailViewModel ()
 /** session */
 @property (nonatomic, strong) AFHTTPSessionManager *sessionManager;
+
+/** <#description#> */
+@property (nonatomic, strong) RACSignal *userNameSignal;
+
+/** <#description#> */
+@property (nonatomic, strong) RACSignal *passwordSignal;
+
+/** <#description#> */
+@property (nonatomic, strong) RACSignal *reduceSignal;
+
 @end
 @implementation DetailViewModel
 
 - (RACCommand *)orderCreateCommand
 {
-    _orderCreateCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-            NSLog(@"==%@",self.userName);
-            //提交网络请求
-            NSLog(@"网络请求");
-            //成功
-            [subscriber sendNext:@"33333"];
-            [subscriber sendCompleted];
+    if (!_orderCreateCommand) {
+        NSLog(@"=%@==%@",self.userName,self.password);
+        RACSignal *userNameSignal = [RACObserve(self, userName)
+                                                       map:^id(NSString *value) {
+                                                           if (value.length > 2) {
+                                                               return @(YES);
+                                                           }
+                                                           return @(NO);
+                                                       }];
+        RACSignal *passwordSignal = [RACObserve(self, password)
+                                     map:^id(NSString *value) {
+                                         if (value.length > 3) {
+                                             return @(YES);
+                                         }
+                                         return @(NO);
+                                     }];
+        RACSignal *reduceSignal = [RACSignal combineLatest:@[passwordSignal,userNameSignal]
+                                          reduce:^id(NSNumber *userName,NSNumber *password){
+                                              return @([userName boolValue] && [password boolValue]);
+                                          }];
+        
+        
+        _orderCreateCommand = [[RACCommand alloc] initWithEnabled:reduceSignal signalBlock:^RACSignal *(id input) {
+            return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+                
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    
+                    [subscriber sendNext:@{@"code":@"00"}];
+                    [subscriber sendCompleted];
+                });
+                
+                return nil;
+            }];
             
-            //失败,error中要包含一些失败信息，不然
-            [subscriber sendError:nil];
-            
-            return nil;
         }];
-    }];
+    }
     return _orderCreateCommand;
 }
 
-- (RACDisposable *)mergeSignal
-{
-    if (!_mergeSignal) {
-        _mergeSignal = [[RACSignal merge:@[]] subscribeCompleted:^{
-            NSLog(@"两个网络请求都已经完成");
-        }];
-    }
-    return _mergeSignal;
-}
 
 
 

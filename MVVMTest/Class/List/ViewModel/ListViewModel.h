@@ -15,16 +15,9 @@
 /**
  * 存放数据源
  */
-@property (nonatomic, strong) NSMutableArray *dataArray;
+@property (nonatomic, strong, readonly) NSMutableArray *dataArray;
 
-/**
- * cellClick
- */
-@property (nonatomic, strong) RACSubject *cellClick;
+/** RACCommand */
+@property (nonatomic, strong, readonly) RACCommand *listCommand;
 
-
-/**
- 登陆按钮点击
- */
-@property (nonatomic, strong) RACSubject *scrollViewDidScroll;
 @end

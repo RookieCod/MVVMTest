@@ -8,9 +8,12 @@
 
 #import "ListTableView.h"
 #import "ListTableCell.h"
+#import "UITableView+FDTemplateLayoutCell.h"
+
+static NSString *identifier = @"cellIdentifier";
+
 @interface ListTableView ()<UITableViewDelegate,UITableViewDataSource>
 {
-    ListViewModel *_viewModel;
 
 }
 /**
@@ -25,14 +28,12 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        _viewModel = viewModel;
-        
-        [[self rac_signalForSelector:@selector(scrollViewDidScroll:) fromProtocol:@protocol(UIScrollViewDelegate)]
-            subscribeNext:^(RACTuple *x) {
-                UITableView *tt = (UITableView *)x.first;
-                [_viewModel.scrollViewDidScroll sendNext:tt];
-            }];
+        //添加子视图
         [self createViews];
+        
+        [RACObserve(self, dataArray) subscribeNext:^(id x) {
+            [self.mainTableView reloadData];
+        }];
     }
     return self;
 }
@@ -48,8 +49,10 @@
         _mainTableView = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStylePlain];
         _mainTableView.delegate = self;
         _mainTableView.dataSource = self;
-        _mainTableView.backgroundColor = [UIColor clearColor];;
-//        _mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _mainTableView.backgroundColor = [UIColor clearColor];
+        _mainTableView.estimatedRowHeight = 100;
+        [_mainTableView registerClass:[ListTableCell class]
+               forCellReuseIdentifier:identifier];
     }
     return _mainTableView;
 }
@@ -58,40 +61,39 @@
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    NSInteger count = _viewModel.dataArray.count;
+    NSInteger count = self.dataArray.count;
     return count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *identifier = @"cellIdentifier";
-    ListTableCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    if (!cell) {
-        cell = [[ListTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-    }
+    ListTableCell *cell = [ListTableCell tableView:tableView cellWithIdentifier:identifier];
     
-    [[[cell.loginButton
-            rac_signalForControlEvents:UIControlEventTouchUpInside]
-            takeUntil:cell.rac_prepareForReuseSignal]
-            subscribeNext:^(id x) {
-            //要用RACSubject把这个实现调到VC中去，不要再view中做逻辑的处理
-            //也可以把loginButton属性放在.h文件里边（不建议），这样的话把button暴露在外部
-            //
-            }];
-    cell.listModel = [_viewModel.dataArray objectAtIndex:indexPath.row];
+    [cell configViewsWithModel:[self.dataArray objectAtIndex:indexPath.row]];
     return cell;
 }
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return [ListTableCell cellHeight:[_viewModel.dataArray objectAtIndex:indexPath.row]];
+    return [tableView fd_heightForCellWithIdentifier:identifier
+                                    cacheByIndexPath:indexPath
+                                       configuration:^(ListTableCell *cell) {
+                                           [cell configViewsWithModel:[self.dataArray objectAtIndex:indexPath.row]];
+                                       }];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
     //如果有跳转逻辑 要放到controller中去做
-    [_viewModel.cellClick sendNext:nil];
+    [self.cellClick sendNext:nil];
 }
 
+- (RACSubject *)cellClick
+{
+    if (!_cellClick) {
+        _cellClick = [RACSubject subject];
+    }
+    return _cellClick;
+}
 @end
