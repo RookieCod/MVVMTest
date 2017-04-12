@@ -71,6 +71,14 @@ static char TAG_ACTIVITY_SHOW;
                 }
                 else if (image) {
                     wself.image = image;
+                    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+                    animation.fromValue = [NSNumber numberWithFloat:0.5f];
+                    animation.toValue = [NSNumber numberWithFloat:1.0f];
+                    //animation.autoreverses = YES;
+                    animation.duration = 0.5f;
+                    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+                    [wself.layer addAnimation: animation forKey:@"FadeIn"];
+                
                     [wself setNeedsLayout];
                 } else {
                     if ((options & SDWebImageDelayPlaceholder)) {

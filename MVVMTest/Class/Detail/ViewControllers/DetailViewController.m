@@ -31,7 +31,6 @@
     
     
     RAC(self.detailViewModel,userName) = self.detailView.userNameField.rac_textSignal;
-    
     RAC(self.detailViewModel,password) = self.detailView.passwordField.rac_textSignal;
     
     RACSignal *validUserNameSignal =
@@ -39,11 +38,14 @@
      map:^id(NSString *text) {
          return @([self isValidUserName:text]);
      }];
+   
     RACSignal *validPasswordSignal =
     [self.detailView.passwordField.rac_textSignal
      map:^id(NSString *text) {
          return @([self isValidPassword:text]);
      }];
+    
+    
     RAC(self.detailView.userNameField,backgroundColor) =
     [validUserNameSignal
      map:^id(NSNumber *value) {
@@ -64,70 +66,59 @@
          self.detailView.loginButton.enabled = [signalActive boolValue];
      }];
     
-    //    [[self.detailView.loginButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(UIButton *x) {
-    //        NSLog(@"=====%@",x);
-    //    }];
+    //RACCommond的第一次种用法，不和button绑定，用execute方法触发commond
     
+    @weakify(self);
+    [[self.detailView.loginButton
+     rac_signalForControlEvents:UIControlEventTouchUpInside]
+      subscribeNext:^(id x) {
+          @strongify(self);
+          
+          [[self.detailViewModel.orderCreateCommand.executing skip:1] subscribeNext:^(id x) {
+              if ([x boolValue]) {
+                  NSLog(@"loading");
+              } else {
+              
+                  NSLog(@"执行完毕");
+              }
+          }];
+          
+          [[self.detailViewModel.orderCreateCommand execute:@111] subscribeNext:^(id x) {
+              NSLog(@"取得结果");
+          } error:^(NSError *error) {
+              
+          }];
+      }];
     
-//    @weakify(self);
-//    [[self.detailView.loginButton
-//      rac_signalForControlEvents:UIControlEventTouchUpInside]
-//     subscribeNext:^(id x) {
-//         @strongify(self);
-//         //execute:input，参数是传递到commandblock中的参数，可以作为网络请求的入参传递过去
-//         [[self.detailViewModel.orderCreateCommand execute:@1]
-//          subscribeNext:^(NSString *x) {
-//              //NSLog(@"成功拿到数据==%@",x);
-//              UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Alert"
-//                                                                  message:@""
-//                                                                 delegate:nil
-//                                                        cancelButtonTitle:@""
-//                                                        otherButtonTitles:@"确定", nil];
-//              [alertView.rac_buttonClickedSignal subscribeNext:^(NSNumber *index) {
-//                  if ([index integerValue] == 1) {
-//                      NSLog(@"确定按钮的点击");
-//                  }
-//              }];
-//              [alertView show];
-//          }
-//          error:^(NSError *error) {
-//              NSLog(@"登陆失败的回调");
-//          }];
-//     }];
-    
+    /*
     self.detailView.loginButton.rac_command = self.detailViewModel.orderCreateCommand;
     self.detailView.loginButton.rac_command.allowsConcurrentExecution = NO;
     
     
-    //数据处理
     [self.detailView.loginButton.rac_command.executionSignals
      subscribeNext:^(id x) {
          NSLog(@"loading");
          [x subscribeNext:^(id x) {
              NSLog(@"success");
-             SocketViewController *socketController = [[SocketViewController alloc] init];
-             [self.navigationController pushViewController:socketController animated:YES];
          }];
+         
      }];
+    [self.detailView.loginButton.rac_command.errors subscribeNext:^(id x) {
+        NSLog(@"错误处理");
+    }];
     
-    //错误处理
-    [self.detailView.loginButton.rac_command.errors
+    [[self.detailView.loginButton.rac_command.executing skip:1]
      subscribeNext:^(id x) {
-         NSLog(@"errors = %@",x);
+         if ([x boolValue] == YES) {
+             NSLog(@"loading");
+         } else {
+             NSLog(@"success");
+         }
      }];
+    */
     
-//    [[self.detailView.loginButton.rac_command.executing skip:1]
-//     subscribeNext:^(id x) {
-//         if ([x boolValue] == YES) {
-//             NSLog(@"loading");
-//         } else {
-//             NSLog(@"success");
-//         }
-//     }];
-    
-    
-    /*
     //rac merge用来处理两个或多个请求需要全部完成后去执行后续操作的情况
+    /*
     RACSignal *request1 = [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -163,9 +154,9 @@
      subscribeNext:^(NSNotification *notification) {
          NSLog(@"name=%@",notification.name);
      }];
-    
-    //RACObserve
     */
+    //RACObserve
+    
     
     
     //RAC进阶
@@ -188,37 +179,42 @@
     }];
     
     // 把signalA拼接到signalB后，signalA发送完成，signalB才会被激活。
-    RACSignal *concatSignal = [signalB concat:signalA];
+    RACSignal *concatSignal = [signalA concat:signalB];
     
     // 以后只需要面对拼接信号开发。
     // 订阅拼接的信号，不需要单独订阅signalA，signalB
     // 内部会自动订阅。
     // 注意：第一个信号必须发送完成，第二个信号才会被激活
-    [concatSignal subscribeNext:^(id x) {
-        
-        NSLog(@"%@",x);
-        
+    [concatSignal subscribeCompleted:^{
+        NSLog(@"完成");
     }];
     */
     //  2、then:用于连接两个信号，当第一个信号完成，才会连接then返回的信号。使用场景是什么？没卵用啊感觉
+    //     订阅信号只会第二个信号的值
     /*
     [[[RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-        [subscriber sendNext:@1];
-        [subscriber sendCompleted];
+       
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [subscriber sendNext:@1];
+            [subscriber sendCompleted];
+        });
         return nil;
     }] then:^RACSignal *{
+        
         return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-            [subscriber sendNext:@2];
+            [subscriber sendNext:@3];
             [subscriber sendCompleted];
+            
             return nil;
         }];
-    }] subscribeNext:^(id x) {
-        NSLog(@"====%@",x);
+    }] subscribeCompleted:^{
+        NSLog(@"完成");
     }];
     */
     //  3、ReactiveCocoa操作方法之秩序。
     //    doNext: 执行Next之前，会先执行这个Block
     //  doCompleted: 执行sendCompleted之前，会先执行这个Block
+    
     /*
     [[[[RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         [subscriber sendNext:@1];
@@ -235,7 +231,31 @@
         
         NSLog(@"%@",x);
     }];
-     */
+    */
+    
+    
+    //combineLatest:将多个信号合并起来（大于等于两个），并且拿到各个信号的最新的值,必须每个合并的signal至少都有过一次sendNext，才会触发合并的信号
+    /*
+    RACSignal *signalA = [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        [subscriber sendNext:@1];
+        [subscriber sendCompleted];
+        return nil;
+    }];
+    
+    RACSignal *signalB = [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        [subscriber sendNext:@2];
+        [subscriber sendCompleted];
+        
+        return nil;
+    }];
+    
+    [[RACSignal combineLatest:@[signalA,signalB]
+                      reduce:^id(NSNumber *num1,NSNumber *num2){
+                          return [NSString stringWithFormat:@"%@<%@",num1,num2];
+                      }] subscribeNext:^(NSString *x) {
+                          NSLog(@"%@",x);
+                      }];
+    */
 }
 
 - (DetailViews *)detailView
