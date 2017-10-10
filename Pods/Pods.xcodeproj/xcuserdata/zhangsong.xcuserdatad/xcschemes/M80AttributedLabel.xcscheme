@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '2164C52877AD5D14B47EC85401371A04'
-               BlueprintName = 'SocketRocket'
+               BlueprintIdentifier = '854493676608392C4635761374D8A983'
+               BlueprintName = 'M80AttributedLabel'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'libSocketRocket.a'>
+               BuildableName = 'libM80AttributedLabel.a'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

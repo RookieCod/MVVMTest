@@ -67,22 +67,19 @@
      }];
     
     //RACCommond的第一次种用法，不和button绑定，用execute方法触发commond
-    
+    [[self.detailViewModel.orderCreateCommand.executing skip:1] subscribeNext:^(id x) {
+        if ([x boolValue]) {
+            NSLog(@"loading");
+        } else {
+        
+            NSLog(@"success");
+        }
+    }];
     @weakify(self);
     [[self.detailView.loginButton
      rac_signalForControlEvents:UIControlEventTouchUpInside]
       subscribeNext:^(id x) {
           @strongify(self);
-          
-          [[self.detailViewModel.orderCreateCommand.executing skip:1] subscribeNext:^(id x) {
-              if ([x boolValue]) {
-                  NSLog(@"loading");
-              } else {
-              
-                  NSLog(@"执行完毕");
-              }
-          }];
-          
           [[self.detailViewModel.orderCreateCommand execute:@111] subscribeNext:^(id x) {
               NSLog(@"取得结果");
           } error:^(NSError *error) {
@@ -97,6 +94,7 @@
     
     [self.detailView.loginButton.rac_command.executionSignals
      subscribeNext:^(id x) {
+         //添加菊花转圈的
          NSLog(@"loading");
          [x subscribeNext:^(id x) {
              NSLog(@"success");
@@ -106,15 +104,6 @@
     [self.detailView.loginButton.rac_command.errors subscribeNext:^(id x) {
         NSLog(@"错误处理");
     }];
-    
-    [[self.detailView.loginButton.rac_command.executing skip:1]
-     subscribeNext:^(id x) {
-         if ([x boolValue] == YES) {
-             NSLog(@"loading");
-         } else {
-             NSLog(@"success");
-         }
-     }];
     */
     
     //rac merge用来处理两个或多个请求需要全部完成后去执行后续操作的情况
@@ -277,7 +266,7 @@
 
 - (BOOL)isValidUserName:(NSString *)text
 {
-    if (text.length > 0 || text.integerValue != 0) {
+    if (text.length > 3 || text.integerValue != 0) {
         return YES;
     }
     return NO;
@@ -285,7 +274,7 @@
 
 - (BOOL)isValidPassword:(NSString *)text
 {
-    if (text.length > 0 || text.integerValue != 0) {
+    if (text.length > 3 || text.integerValue != 0) {
         return YES;
     }
     return NO;

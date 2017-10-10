@@ -85,6 +85,7 @@
     if (!_loginButton) {
         _loginButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_loginButton setTitle:@"登陆" forState:UIControlStateNormal];
+        [_loginButton setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
         [_loginButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
         
     }
