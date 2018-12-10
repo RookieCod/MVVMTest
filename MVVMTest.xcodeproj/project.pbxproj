@@ -423,6 +423,7 @@
 		D652AD9C1E2E06AE0082D194 /* DetailViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewModel.m; sourceTree = "<group>"; };
 		D65D081B1E6FD810005B7FD2 /* PKProtocolExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKProtocolExtension.h; sourceTree = "<group>"; };
 		D65D081C1E6FD810005B7FD2 /* PKProtocolExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKProtocolExtension.m; sourceTree = "<group>"; };
+		D66E05B121BE8DE700D1EFF3 /* header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = header.h; sourceTree = "<group>"; };
 		D6AF7B6C1E1F430E00A51C4C /* ListViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListViewModel.h; sourceTree = "<group>"; };
 		D6AF7B6D1E1F430E00A51C4C /* ListViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListViewModel.m; sourceTree = "<group>"; };
 		D9DAF4A15BD5379FAF1227B1 /* Pods-MVVMTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MVVMTest.release.xcconfig"; path = "Pods/Target Support Files/Pods-MVVMTest/Pods-MVVMTest.release.xcconfig"; sourceTree = "<group>"; };
@@ -815,6 +816,7 @@
 			children = (
 				D6318AF61E1B86FB00E2DCC6 /* AppDelegate.h */,
 				D6318AF71E1B86FB00E2DCC6 /* AppDelegate.m */,
+				D66E05B121BE8DE700D1EFF3 /* header.h */,
 				D6318AF81E1B86FB00E2DCC6 /* List */,
 				D61FBB651E2C9A3C000CE532 /* Detail */,
 			);
