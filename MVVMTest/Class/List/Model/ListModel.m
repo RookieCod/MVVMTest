@@ -18,4 +18,11 @@
 {
     NSLog(@"wash something");
 }
+
++ (void)log
+{
+    NSLog(@"log something");
+}
+
+
 @end
