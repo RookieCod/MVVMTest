@@ -23,4 +23,10 @@
 {
     NSLog(@"haha something");
 }
+
++ (void)log
+{
+    NSLog(@"log something");
+}
+
 @end
