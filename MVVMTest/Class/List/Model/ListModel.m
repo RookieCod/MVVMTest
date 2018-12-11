@@ -29,8 +29,4 @@
     NSLog(@"haha");
 }
 
-+ (void)read
-{
-    NSLog(@"read book");
-}
 @end
