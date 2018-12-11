@@ -9,5 +9,8 @@
 #import "ListModel.h"
 
 @implementation ListModel
-
++ (void)eat
+{
+    NSLog(@"eat something");
+}
 @end
