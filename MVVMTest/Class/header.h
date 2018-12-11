@@ -9,5 +9,5 @@
 #ifndef header_h
 #define header_h
 
-
+//游离状态的HEAD
 #endif /* header_h */
