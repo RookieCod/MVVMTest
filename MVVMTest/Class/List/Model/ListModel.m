@@ -24,4 +24,9 @@
     NSLog(@"lalal");
 }
 
++ (void)lalala
+{
+    NSLog(@"haha");
+}
+
 @end
