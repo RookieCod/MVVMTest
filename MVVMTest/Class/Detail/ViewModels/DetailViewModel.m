@@ -78,5 +78,9 @@
     return NO;
 }
 
+- (BOOL)developRebaseValid
+{
+    return YES;
+}
 
 @end
