@@ -27,6 +27,7 @@
 + (void)lalala
 {
     NSLog(@"haha");
+    NSLog(@"lili");
 }
 
 @end
