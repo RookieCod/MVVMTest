@@ -18,4 +18,9 @@
 {
     NSLog(@"wash something");
 }
+
++ (void)haha
+{
+    NSLog(@"haha something");
+}
 @end
