@@ -13,4 +13,9 @@
 {
     NSLog(@"eat something");
 }
+
++ (void)wash
+{
+    NSLog(@"wash something");
+}
 @end
